@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>delete</title>
+</head>
+<body>
+<h1>chose the books you want to delete</h1>
+
+<form action="{% url  'book_list:delete_list' %}" method="post">
+    {% csrf_token %}
+    {% for book in book_list %}
+    <p><input type="checkbox" name="book" id="book{{ book.id }}" value="{{ book.book_name }}"> {{ book.book_name }}</p>
+    {% endfor %}
+    <input type="submit" value="delete">
+</form>
+</body>
+</html>
