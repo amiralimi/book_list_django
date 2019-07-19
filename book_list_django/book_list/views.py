@@ -4,6 +4,10 @@ from django.urls import reverse
 from .models import Book
 
 
+def main_page(request):
+    return render(request, 'book_list/main_page.html')
+
+
 def detail(request, book_id):
     try:
         book = Book.objects.get(pk=book_id)

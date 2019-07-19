@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book List</title>
+</head>
+<body>
+<form action="{% url 'book_list:list' %}">
+    <input type="submit" value="list" />
+</form>
+<form action="{% url 'book_list:delete' %}">
+    <input type="submit" value="delete" />
+</form>
+</body>
+</html>
