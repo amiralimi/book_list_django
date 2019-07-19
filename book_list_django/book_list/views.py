@@ -8,11 +8,11 @@ def detail(request, book_id):
         book = Book.objects.get(pk=book_id)
     except Book.DoesNotExist:
         raise Http404("Book does not exist.")
-    return render(request, 'book_list/detail.html', {'book' : book})
+    return render(request, 'book_list/detail.html', {'book': book})
 
 
 def view(request):
-    book_list = Book.objects.order_by('-book_name')
+    book_list = Book.objects.order_by('-book_name')[::-1]
     context = {
         'book_list': book_list,
     }
