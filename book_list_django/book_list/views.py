@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import Http404, HttpResponseRedirect
 from django.urls import reverse
+from django.utils.datastructures import MultiValueDictKeyError
+
 from .models import Book
 
 
@@ -33,5 +35,9 @@ def delete(request):
 
 
 def delete_list(request):
-    Book.objects.filter(book_name=request.POST['book']).delete()
-    return HttpResponseRedirect(reverse('book_list:list'))
+    try:
+        book_name = request.POST['book']
+    except MultiValueDictKeyError:
+        return redirect('book_list:list')
+    Book.objects.filter(book_name).delete()
+    return redirect('book_list:list')
