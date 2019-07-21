@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add</title>
+</head>
+<body>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<form action="{% url 'book_list:add_book' %}" method="post"> {% csrf_token %}
+    name:
+    <input type="text" name="book_name"><br>
+    date published:
+    <input type="date" name="pub_date"><br>
+    number of pages:
+    <input type="number" name="page_num"><br>
+    <input type="checkbox" name="first_print" value="True"> first print<br>
+    <input type="submit" value="add">
+</form>
+</body>
+</html>

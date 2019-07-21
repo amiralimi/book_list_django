@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect
-from django.http import Http404, HttpResponseRedirect
-from django.urls import reverse
+from django.http import Http404
 from django.utils.datastructures import MultiValueDictKeyError
-
 from .models import Book
+import datetime
 
 
 def main_page(request):
@@ -40,4 +39,30 @@ def delete_list(request):
     except MultiValueDictKeyError:
         return redirect('book_list:list')
     Book.objects.filter(book_name).delete()
+    return redirect('book_list:list')
+
+
+def add(request):
+    return render(request, 'book_list/add.html')
+
+
+def add_book(request):
+    try:
+        book_name = request.POST['book_name']
+        pub_date = request.POST['pub_date']
+        page_num = request.POST['page_num']
+        if book_name == "" or pub_date == "" or page_num == "":
+            raise Exception("no entered value")
+        first_print = request.POST['first_print']
+    except MultiValueDictKeyError:
+        first_print = False
+    except Exception:
+        context = {
+            'error_message': 'please fill all the boxes'
+        }
+        return render(request, 'book_list/add.html', context)
+    pub_date = datetime.datetime.strptime(pub_date, '%Y-%m-%d').date()
+    page_num = int(page_num)
+    b = Book(book_name=book_name, pub_date=pub_date, page_num=page_num, first_print=first_print)
+    b.save()
     return redirect('book_list:list')
