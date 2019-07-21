@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit {{book.book_name}}</title>
+</head>
+<body>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<form action="{% url 'book_list:edit_book' id %}" method="post"> {% csrf_token %}
+    name:
+    <input type="text" name="book_name" value="{{book_name}}"><br>
+    date published:
+    <input type="date" name="pub_date" value="{{pub_date}}"><br>
+    number of pages:
+    <input type="number" name="page_num" value="{{page_num}}"><br>
+    {% if first_print %}
+        <input type="checkbox" name="first_print" value="True" checked> first print<br>
+    {% else %}
+        <input type="checkbox" name="first_print" value="True"> first print<br>
+    {% endif %}
+    <input type="submit" value="edit">
+</form>
+</body>
+</html>
