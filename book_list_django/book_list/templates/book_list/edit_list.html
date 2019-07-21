@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>edit list</title>
+</head>
+<body>
+{% if book_list %}
+<ul>
+    {% for book in book_list %}
+    <li><a href="{% url 'book_list:edit' book.id %}">{{ book.book_name }}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No books to edit.</p>
+{% endif %}
+</body>
+</html>

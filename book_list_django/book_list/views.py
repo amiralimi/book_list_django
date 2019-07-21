@@ -68,6 +68,14 @@ def add_book(request):
     return redirect('book_list:list')
 
 
+def edit_list(request):
+    book_list = Book.objects.order_by('-book_name')[::-1]
+    context = {
+        'book_list': book_list,
+    }
+    return render(request, 'book_list/edit_list.html', context)
+
+
 def edit(request, book_id):
     book = Book.objects.get(pk=book_id)
     context = {
