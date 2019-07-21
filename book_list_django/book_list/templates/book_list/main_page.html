@@ -8,8 +8,14 @@
 <form action="{% url 'book_list:list' %}">
     <input type="submit" value="list" />
 </form>
+<form action="{% url 'book_list:add' %}">
+    <input type="submit" value="add" />
+</form>
 <form action="{% url 'book_list:delete' %}">
     <input type="submit" value="delete" />
+</form>
+<form action="{% url 'book_list:edit_list' %}">
+    <input type="submit" value="edit" />
 </form>
 </body>
 </html>
